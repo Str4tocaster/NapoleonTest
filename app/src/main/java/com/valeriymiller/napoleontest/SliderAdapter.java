@@ -20,11 +20,11 @@ import java.util.List;
 public class SliderAdapter extends RecyclerView.Adapter<SliderAdapter.SliderViewHolder> {
 
     private Context context;
-    private List<String> urls;
+    private List<SliderItemVO> items;
 
-    public SliderAdapter(Context context, List<String> urls) {
+    public SliderAdapter(Context context, List<SliderItemVO> items) {
         this.context = context;
-        this.urls = urls;
+        this.items = items;
     }
 
     @Override
@@ -35,22 +35,29 @@ public class SliderAdapter extends RecyclerView.Adapter<SliderAdapter.SliderView
 
     @Override
     public void onBindViewHolder(SliderViewHolder holder, int position) {
-        String url = urls.get(position);
-        Picasso.with(context).load(url).into(holder.ivImage);
+        SliderItemVO item = items.get(position);
+
+        Picasso.with(context).load(item.getImageUrl()).into(holder.ivImage);
+        holder.tvHeader.setText(item.getHeaderText());
+        holder.tvContent.setText(item.getContentText());
     }
 
     @Override
     public int getItemCount() {
-        return urls.size();
+        return items.size();
     }
 
     public static class SliderViewHolder extends RecyclerView.ViewHolder {
 
         ImageView ivImage;
+        TextView tvHeader;
+        TextView tvContent;
 
         public SliderViewHolder(View itemView) {
             super(itemView);
             ivImage = (ImageView) itemView.findViewById(R.id.ivImage);
+            tvHeader = (TextView) itemView.findViewById(R.id.tvHeader);
+            tvContent = (TextView) itemView.findViewById(R.id.tvContent);
         }
     }
 

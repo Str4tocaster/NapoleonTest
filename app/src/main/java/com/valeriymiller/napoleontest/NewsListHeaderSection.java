@@ -20,10 +20,12 @@ import io.github.luizgrp.sectionedrecyclerviewadapter.StatelessSection;
 public class NewsListHeaderSection extends StatelessSection {
 
     private Context context;
+    private List<SliderItemVO> items;
 
-    public NewsListHeaderSection (Context context) {
+    public NewsListHeaderSection (Context context, List<SliderItemVO> items) {
         super(R.layout.news_list_header, R.layout.news_list_item);
         this.context = context;
+        this.items = items;
     }
 
     @Override
@@ -49,12 +51,7 @@ public class NewsListHeaderSection extends StatelessSection {
     public void onBindHeaderViewHolder(RecyclerView.ViewHolder holder) {
         HeaderViewHolder headerHolder = (HeaderViewHolder) holder;
 
-        List<String> urls = new ArrayList<>();
-        urls.add("http://i.imgur.com/DvpvklR.png");
-        urls.add("http://i.imgur.com/DvpvklR.png");
-        urls.add("http://i.imgur.com/DvpvklR.png");
-
-        SliderAdapter sliderAdapter = new SliderAdapter(context, urls);
+        SliderAdapter sliderAdapter = new SliderAdapter(context, items);
 
         SnapHelper snapHelper = new PagerSnapHelper();
         snapHelper.attachToRecyclerView(headerHolder.recyclerView);

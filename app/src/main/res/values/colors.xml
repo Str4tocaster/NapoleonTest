@@ -7,6 +7,8 @@
     <color name="colorPrimaryDark">#9fa0a4</color>
     <color name="colorAccent">#FF4081</color>
     <color name="colorWhite">#FFFFFF</color>
+    <color name="colorWhiteTransparent">#B3FFFFFF</color>
     <color name="colorTransparent">#00FFFFFF</color>
     <color name="colorSectionBackground">#8b8c8f</color>
+    <color name="colorText">#000000</color>
 </resources>

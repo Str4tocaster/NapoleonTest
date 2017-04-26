@@ -9,9 +9,6 @@ import java.util.List;
 public interface IMainView {
     public void setNewsListItems(List<NewsItemVO> stockItems, List<NewsItemVO> discountItems);
     public void setSliderItems(List<SliderItemVO> items);
-    public void showSliderProgress();
-    public void hideSliderProgress();
-    public void showNewsProgress();
-    public void hideNewsProgress();
-    public void showError();
+    public void showProgress(boolean show);
+    public void showError(String errorMessage);
 }

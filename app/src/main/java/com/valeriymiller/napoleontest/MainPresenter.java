@@ -38,13 +38,12 @@ public class MainPresenter implements IMainPresenter {
 
     @Override
     public void onStart() {
+        view.showProgress(true);
         loadNewsListItems();
         loadSliderItems();
     }
 
     private void loadNewsListItems() {
-        view.showNewsProgress();
-
         Subscription getNewsItemsSubscription = repository.getNewsItems()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -54,6 +53,7 @@ public class MainPresenter implements IMainPresenter {
 
     private void handleSuccessLoadNews(@NonNull List<NewsItemVO> items) {
 
+        // divide results into 2 groups
         List<NewsItemVO> stockItems = new ArrayList<>();
         List<NewsItemVO> discountItems = new ArrayList<>();
         for (NewsItemVO item : items) {
@@ -68,17 +68,15 @@ public class MainPresenter implements IMainPresenter {
         // show results
         view.setNewsListItems(stockItems, discountItems);
         // hide progress
-        view.hideNewsProgress();
+        view.showProgress(false);
     }
 
     private void handleErrorLoadNews(Throwable throwable) {
-        view.hideNewsProgress();
-        view.showError();
+        view.showProgress(false);
+        view.showError(throwable.getMessage());
     }
 
     private void loadSliderItems() {
-        view.showSliderProgress();
-
         Subscription getSliderItemsSubscription = repository.getSliderItems()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -90,12 +88,12 @@ public class MainPresenter implements IMainPresenter {
         // show results
         view.setSliderItems(items);
         // hide progress
-        view.hideSliderProgress();
+        view.showProgress(false);
     }
 
     private void handleErrorLoadSlider(Throwable throwable) {
-        view.hideSliderProgress();
-        view.showError();
+        view.showProgress(false);
+        view.showError(throwable.getMessage());
     }
 
 }

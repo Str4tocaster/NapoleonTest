@@ -10,15 +10,9 @@ public class CustomApplication extends Application {
 
     private MainPresenter mainPresenter;
 
-    @Override
-    public void onCreate() {
-        super.onCreate();
-        // place for realm initialization
-    }
-
     public MainPresenter getMainPresenter() {
         if (mainPresenter == null)
-            mainPresenter = new MainPresenter(new MainRepository());
+            mainPresenter = new MainPresenter(this, new MainRepository());
         return mainPresenter;
     }
 

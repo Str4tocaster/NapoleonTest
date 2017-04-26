@@ -11,4 +11,5 @@ public interface IMainView {
     public void setSliderItems(List<SliderItemVO> items);
     public void showProgress(boolean show);
     public void showError(String errorMessage);
+    public void showNoInternet(boolean show);
 }

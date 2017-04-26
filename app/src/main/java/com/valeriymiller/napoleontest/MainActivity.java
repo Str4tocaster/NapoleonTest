@@ -7,6 +7,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.ProgressBar;
+import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -17,6 +18,7 @@ import io.github.luizgrp.sectionedrecyclerviewadapter.SectionedRecyclerViewAdapt
 public class MainActivity extends AppCompatActivity implements IMainView {
 
     private ProgressBar progressBar;
+    private RelativeLayout noInternetLayout;
 
     private List<SliderItemVO> sliderItems;
     private List<NewsItemVO> stockItems;
@@ -37,6 +39,9 @@ public class MainActivity extends AppCompatActivity implements IMainView {
         // init progress
         progressBar = (ProgressBar) findViewById(R.id.progressBar);
 
+        // init no internet layout
+        noInternetLayout = (RelativeLayout) findViewById(R.id.noInternet);
+
         // init lists
         sliderItems = new ArrayList<>();
         stockItems = new ArrayList<>();
@@ -45,8 +50,8 @@ public class MainActivity extends AppCompatActivity implements IMainView {
         // init list adapter
         newsListAdapter = new SectionedRecyclerViewAdapter();
         newsListAdapter.addSection(new NewsListHeaderSection(this, sliderItems));
-        newsListAdapter.addSection(new NewsListSection(this, "Акции", stockItems));
-        newsListAdapter.addSection(new NewsListSection(this, "Скидки", discountItems));
+        newsListAdapter.addSection(new NewsListSection(this, getString(R.string.stock), stockItems));
+        newsListAdapter.addSection(new NewsListSection(this, getString(R.string.discount), discountItems));
 
         // init recyclerview
         recyclerView = (RecyclerView) findViewById(R.id.recyclerView);
@@ -102,5 +107,11 @@ public class MainActivity extends AppCompatActivity implements IMainView {
     @Override
     public void showError(String errorMessage) {
         Toast.makeText(this, errorMessage, Toast.LENGTH_LONG).show();
+    }
+
+    @Override
+    public void showNoInternet(boolean show) {
+        if (show) noInternetLayout.setVisibility(View.VISIBLE);
+        else noInternetLayout.setVisibility(View.GONE);
     }
 }

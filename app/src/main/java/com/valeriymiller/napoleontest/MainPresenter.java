@@ -1,5 +1,8 @@
 package com.valeriymiller.napoleontest;
 
+import android.content.Context;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.support.annotation.NonNull;
 
 import java.util.ArrayList;
@@ -18,11 +21,13 @@ public class MainPresenter implements IMainPresenter {
 
     private IMainView view;
     private IMainRepository repository;
+    private Context context;
 
     private CompositeSubscription compositeSubscription = new CompositeSubscription();
 
-    public MainPresenter(IMainRepository repository) {
+    public MainPresenter(Context context, IMainRepository repository) {
         this.repository = repository;
+        this.context = context;
     }
 
     @Override
@@ -39,8 +44,14 @@ public class MainPresenter implements IMainPresenter {
     @Override
     public void onStart() {
         view.showProgress(true);
-        loadNewsListItems();
-        loadSliderItems();
+        if (isNetworkAvailable(context)) {
+            view.showNoInternet(false);
+            loadNewsListItems();
+            loadSliderItems();
+        } else {
+            view.showNoInternet(true);
+            view.showProgress(false);
+        }
     }
 
     private void loadNewsListItems() {
@@ -94,6 +105,16 @@ public class MainPresenter implements IMainPresenter {
     private void handleErrorLoadSlider(Throwable throwable) {
         view.showProgress(false);
         view.showError(throwable.getMessage());
+    }
+
+    private boolean isNetworkAvailable(Context context) {
+        try {
+            ConnectivityManager connectivityManager = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
+            NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
+            return activeNetworkInfo != null;
+        } catch (Exception e) {
+            return false;
+        }
     }
 
 }

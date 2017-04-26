@@ -2,6 +2,7 @@ package com.valeriymiller.napoleontest;
 
 import android.support.annotation.NonNull;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import rx.Subscription;
@@ -52,8 +53,20 @@ public class MainPresenter implements IMainPresenter {
     }
 
     private void handleSuccessLoadNews(@NonNull List<NewsItemVO> items) {
+
+        List<NewsItemVO> stockItems = new ArrayList<>();
+        List<NewsItemVO> discountItems = new ArrayList<>();
+        for (NewsItemVO item : items) {
+            if (item.getType() == NewsDTO.TYPE_STOCK) {
+                stockItems.add(item);
+            }
+            if (item.getType() == NewsDTO.TYPE_DISCOUNT) {
+                discountItems.add(item);
+            }
+        }
+
         // show results
-        view.setNewsListItems(items, items);
+        view.setNewsListItems(stockItems, discountItems);
         // hide progress
         view.hideNewsProgress();
     }

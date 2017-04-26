@@ -72,13 +72,4 @@ public class NewsListHeaderSection extends StatelessSection {
             recyclerView = (RecyclerView) view.findViewById(R.id.recyclerView);
         }
     }
-
-//    static class OffsetDecoration extends RecyclerView.ItemDecoration {
-//
-//        @Override
-//        public void getItemOffsets(Rect outRect, View view, RecyclerView parent, RecyclerView.State state) {
-//            super.getItemOffsets(outRect, view, parent, state);
-//        }
-//    }
-
 }

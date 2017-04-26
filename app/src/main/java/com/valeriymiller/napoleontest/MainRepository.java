@@ -11,9 +11,6 @@ import rx.Single;
 
 public class MainRepository implements IMainRepository {
 
-    private static final int TYPE_STOCK = 1;
-    private static final int TYPE_DISCOUNT = 2;
-
     @Override
     public Single<List<SliderItemVO>> getSliderItems() {
         return getSliderItemsFromNet()
@@ -50,8 +47,9 @@ public class MainRepository implements IMainRepository {
     private Single<List<NewsItemVO>> dtoToNewsItemsVO(List<NewsDTO> dtos) {
         List<NewsItemVO> newsItems = new ArrayList<>();
         for (NewsDTO dto : dtos) {
-            if (dto.getType() == TYPE_STOCK) {
+            if (dto.getType() == NewsDTO.TYPE_STOCK) {
                 newsItems.add(new NewsItemVO(
+                        dto.getType(),
                         dto.getUrlThumbImage(),
                         dto.getName(),
                         dto.getDescr(),
@@ -60,8 +58,9 @@ public class MainRepository implements IMainRepository {
                         0
                         ));
             }
-            if (dto.getType() == TYPE_DISCOUNT) {
+            if (dto.getType() == NewsDTO.TYPE_DISCOUNT) {
                 newsItems.add(new NewsItemVO(
+                        dto.getType(),
                         dto.getUrlThumbImage(),
                         dto.getName(),
                         dto.getGroup(),

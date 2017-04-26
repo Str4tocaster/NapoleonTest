@@ -6,6 +6,9 @@ package com.valeriymiller.napoleontest;
 
 public class NewsDTO {
 
+    public static final int TYPE_STOCK = 1;
+    public static final int TYPE_DISCOUNT = 2;
+
     private int uuid;
     private int type;
     private String name;

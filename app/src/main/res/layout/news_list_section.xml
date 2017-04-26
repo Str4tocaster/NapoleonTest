@@ -13,6 +13,7 @@
         android:layout_centerVertical="true"
         android:layout_marginLeft="16dp"
         android:textColor="@color/colorWhite"
+        android:textStyle="bold"
         android:text="Title of section"
         />
 

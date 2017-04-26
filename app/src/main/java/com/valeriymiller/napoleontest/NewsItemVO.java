@@ -6,6 +6,7 @@ package com.valeriymiller.napoleontest;
 
 public class NewsItemVO {
 
+    private int type;
     private String imgUrl;
     private String headerText;
     private String contentText;
@@ -13,13 +14,22 @@ public class NewsItemVO {
     private float price;
     private float oldPrice;
 
-    public NewsItemVO(String imgUrl, String headerText, String contentText, float sale, float price, float oldPrice) {
+    public NewsItemVO(int type, String imgUrl, String headerText, String contentText, float sale, float price, float oldPrice) {
+        this.type = type;
         this.imgUrl = imgUrl;
         this.headerText = headerText;
         this.contentText = contentText;
         this.sale = sale;
         this.price = price;
         this.oldPrice = oldPrice;
+    }
+
+    public int getType() {
+        return type;
+    }
+
+    public void setType(int type) {
+        this.type = type;
     }
 
     public String getImgUrl() {

@@ -21,13 +21,30 @@
         android:background="@color/colorPrimary"
         />
 
+    <ImageView
+        android:id="@+id/ivCart"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="16dp"
+        android:src="@drawable/ic_cart"
+        android:tint="@color/colorPrimary"
+        />
+
     <TextView
         android:id="@+id/tvHeader"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_toRightOf="@id/ivImage"
-        android:layout_marginTop="10dp"
-        android:text="Акция Lay's"
+        android:layout_toLeftOf="@id/ivCart"
+        android:layout_marginTop="6dp"
+        android:layout_marginRight="10dp"
+        android:textStyle="bold"
+        android:textColor="@color/colorText"
+        android:lines="1"
+        android:text="Header"
         />
 
     <TextView
@@ -35,9 +52,13 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_toRightOf="@id/ivImage"
+        android:layout_toLeftOf="@id/ivCart"
         android:layout_below="@id/tvHeader"
         android:layout_marginTop="4dp"
-        android:text="Футбол вкуснее с Lay's!"
+        android:layout_marginRight="10dp"
+        android:textColor="@color/colorText"
+        android:lines="1"
+        android:text="Description"
         />
 
     <RelativeLayout
@@ -55,8 +76,9 @@
             android:paddingTop="2dp"
             android:paddingBottom="2dp"
             android:background="@drawable/rounded_rectangle"
-            android:backgroundTint="@color/colorAccent"
+            android:backgroundTint="@color/colorSale"
             android:textColor="@color/colorWhite"
+            android:textStyle="bold"
             android:text="-50%"
             />
 
@@ -68,8 +90,9 @@
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
             android:layout_marginRight="16dp"
-            android:textColor="@color/colorAccent"
-            android:text="1,50 Р"
+            android:textColor="@color/colorSale"
+            android:textStyle="bold"
+            android:text="1.50"
             />
 
         <TextView
@@ -79,7 +102,8 @@
             android:layout_toLeftOf="@id/tvPrice"
             android:layout_centerVertical="true"
             android:layout_marginRight="24dp"
-            android:text="2,99 Р"
+            android:textColor="@color/colorText"
+            android:text="2.99"
             />
 
     </RelativeLayout>
@@ -123,16 +147,6 @@
         <!--android:text="1,50 Р"-->
         <!--/>-->
 
-    <ImageView
-        android:id="@+id/ivCart"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentRight="true"
-        android:layout_marginTop="10dp"
-        android:layout_marginRight="16dp"
-        android:src="@drawable/ic_cart"
-        android:tint="@color/colorPrimary"
-        />
+
 
 </RelativeLayout>

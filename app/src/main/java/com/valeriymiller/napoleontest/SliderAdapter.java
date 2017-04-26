@@ -37,7 +37,10 @@ public class SliderAdapter extends RecyclerView.Adapter<SliderAdapter.SliderView
     public void onBindViewHolder(SliderViewHolder holder, int position) {
         SliderItemVO item = items.get(position);
 
-        Picasso.with(context).load(item.getImageUrl()).into(holder.ivImage);
+        Picasso.with(context)
+                .load(item.getImageUrl())
+                .fit().centerCrop()
+                .into(holder.ivImage);
         holder.tvHeader.setText(item.getHeaderText());
         holder.tvContent.setText(item.getContentText());
     }

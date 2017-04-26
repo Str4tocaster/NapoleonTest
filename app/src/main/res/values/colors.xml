@@ -11,4 +11,5 @@
     <color name="colorTransparent">#00FFFFFF</color>
     <color name="colorSectionBackground">#8b8c8f</color>
     <color name="colorText">#000000</color>
+    <color name="colorSale">#fe4a65</color>
 </resources>

@@ -45,12 +45,24 @@ public class NewsListSection extends StatelessSection {
         final NewsItemViewHolder itemHolder = (NewsItemViewHolder) holder;
         NewsItemVO item = items.get(position);
 
-        Picasso.with(context).load(item.getImgUrl()).into(itemHolder.ivImage);
+        Picasso.with(context).load(item.getImgUrl()).fit().centerCrop().into(itemHolder.ivImage);
         itemHolder.tvHeader.setText(item.getHeaderText());
         itemHolder.tvContent.setText(item.getContentText());
-        itemHolder.tvSale.setText(String.valueOf(item.getSale()));
-        itemHolder.tvPrice.setText(String.valueOf(item.getPrice()));
-        itemHolder.tvOldPrice.setText(String.valueOf(item.getOldPrice()));
+
+        if (item.getType() == NewsDTO.TYPE_STOCK) {
+            itemHolder.tvSale.setVisibility(View.INVISIBLE);
+            itemHolder.tvPrice.setVisibility(View.INVISIBLE);
+            itemHolder.tvOldPrice.setVisibility(View.INVISIBLE);
+        }
+
+        if (item.getType() == NewsDTO.TYPE_DISCOUNT) {
+            itemHolder.tvSale.setVisibility(View.VISIBLE);
+            itemHolder.tvSale.setText(String.valueOf(item.getSale()) + "%");
+            itemHolder.tvPrice.setVisibility(View.VISIBLE);
+            itemHolder.tvPrice.setText(String.valueOf(item.getPrice()));
+            itemHolder.tvOldPrice.setVisibility(View.VISIBLE);
+            itemHolder.tvOldPrice.setText(String.valueOf(item.getOldPrice()));
+        }
     }
 
     @Override

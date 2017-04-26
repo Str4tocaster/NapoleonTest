@@ -74,6 +74,8 @@
         android:layout_below="@id/toolbar"
         android:background="@color/colorPrimary"
         app:tabIndicatorColor="@android:color/white"
+        app:tabTextColor="@color/colorTabText"
+        app:tabSelectedTextColor="@color/colorWhite"
         >
 
         <android.support.design.widget.TabItem

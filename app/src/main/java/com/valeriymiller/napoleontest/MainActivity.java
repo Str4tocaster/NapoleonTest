@@ -1,11 +1,14 @@
 package com.valeriymiller.napoleontest;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.WindowManager;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
@@ -36,11 +39,11 @@ public class MainActivity extends AppCompatActivity implements IMainView {
         // don't show keyboard on start
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
 
-        // init progress
+        // init views
         progressBar = (ProgressBar) findViewById(R.id.progressBar);
-
-        // init no internet layout
         noInternetLayout = (RelativeLayout) findViewById(R.id.noInternet);
+        ImageView ivFilter = (ImageView) findViewById(R.id.ivFilter);
+        ivFilter.setOnClickListener(view -> showAlertDialog());
 
         // init lists
         sliderItems = new ArrayList<>();
@@ -113,5 +116,13 @@ public class MainActivity extends AppCompatActivity implements IMainView {
     public void showNoInternet(boolean show) {
         if (show) noInternetLayout.setVisibility(View.VISIBLE);
         else noInternetLayout.setVisibility(View.GONE);
+    }
+
+    private void showAlertDialog() {
+        new AlertDialog.Builder(this)
+                .setTitle(R.string.alert_title)
+                .setMessage(R.string.alert_content)
+                .setPositiveButton(android.R.string.yes, (dialog, which) -> dialog.cancel())
+                .show();
     }
 }

@@ -1,6 +1,7 @@
 package com.valeriymiller.napoleontest;
 
 import android.content.Context;
+import android.graphics.Paint;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.ImageView;
@@ -62,6 +63,7 @@ public class NewsListSection extends StatelessSection {
             itemHolder.tvPrice.setText(String.valueOf(item.getPrice()));
             itemHolder.tvOldPrice.setVisibility(View.VISIBLE);
             itemHolder.tvOldPrice.setText(String.valueOf(item.getOldPrice()));
+            itemHolder.tvOldPrice.setPaintFlags(itemHolder.tvOldPrice.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
         }
     }
 

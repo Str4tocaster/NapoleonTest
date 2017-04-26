@@ -7,5 +7,8 @@
     <string name="shops">Магазины</string>
     <string name="products">Товары</string>
     <string name="search">Поиск</string>
+    <string name="ok">Ок</string>
+    <string name="alert_title">Заголовок окна</string>
+    <string name="alert_content">Содержимое окна</string>
     <string name="no_internet">Отсутствует интернет-соединение</string>
 </resources>

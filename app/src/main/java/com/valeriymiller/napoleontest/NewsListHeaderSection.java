@@ -53,6 +53,7 @@ public class NewsListHeaderSection extends StatelessSection {
 
         SliderAdapter sliderAdapter = new SliderAdapter(context, items);
 
+        // for one item per sweep
         SnapHelper snapHelper = new PagerSnapHelper();
         headerHolder.recyclerView.setOnFlingListener(null);
         snapHelper.attachToRecyclerView(headerHolder.recyclerView);

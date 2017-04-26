@@ -1,11 +1,10 @@
 package com.valeriymiller.napoleontest;
 
 import android.app.AlertDialog;
-import android.content.DialogInterface;
 import android.os.Build;
+import android.os.Bundle;
 import android.support.v4.graphics.drawable.DrawableCompat;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
@@ -143,11 +142,9 @@ public class MainActivity extends AppCompatActivity implements IMainView {
     }
 
     private void setActiveFilter(TextView textView) {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            DrawableCompat.setTint(tvTopTen.getBackground(), getResources().getColor(R.color.colorPrimary));
-            DrawableCompat.setTint(tvShops.getBackground(), getResources().getColor(R.color.colorPrimary));
-            DrawableCompat.setTint(tvProducts.getBackground(), getResources().getColor(R.color.colorPrimary));
-            DrawableCompat.setTint(textView.getBackground(), getResources().getColor(R.color.colorFilterIndicator));
-        }
+        DrawableCompat.setTint(tvTopTen.getBackground(), getResources().getColor(R.color.colorPrimary));
+        DrawableCompat.setTint(tvShops.getBackground(), getResources().getColor(R.color.colorPrimary));
+        DrawableCompat.setTint(tvProducts.getBackground(), getResources().getColor(R.color.colorPrimary));
+        DrawableCompat.setTint(textView.getBackground(), getResources().getColor(R.color.colorFilterIndicator));
     }
 }

@@ -2,6 +2,8 @@ package com.valeriymiller.napoleontest;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.os.Build;
+import android.support.v4.graphics.drawable.DrawableCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -11,6 +13,7 @@ import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -22,6 +25,9 @@ public class MainActivity extends AppCompatActivity implements IMainView {
 
     private ProgressBar progressBar;
     private RelativeLayout noInternetLayout;
+    private TextView tvTopTen;
+    private TextView tvShops;
+    private TextView tvProducts;
 
     private List<SliderItemVO> sliderItems;
     private List<NewsItemVO> stockItems;
@@ -44,6 +50,16 @@ public class MainActivity extends AppCompatActivity implements IMainView {
         noInternetLayout = (RelativeLayout) findViewById(R.id.noInternet);
         ImageView ivFilter = (ImageView) findViewById(R.id.ivFilter);
         ivFilter.setOnClickListener(view -> showAlertDialog());
+
+        // init filter
+        tvTopTen = (TextView) findViewById(R.id.tvTopTen);
+        tvTopTen.setOnClickListener(view -> setActiveFilter(tvTopTen));
+
+        tvShops = (TextView) findViewById(R.id.tvShops);
+        tvShops.setOnClickListener(view -> setActiveFilter(tvShops));
+
+        tvProducts = (TextView) findViewById(R.id.tvProducts);
+        tvProducts.setOnClickListener(view -> setActiveFilter(tvProducts));
 
         // init lists
         sliderItems = new ArrayList<>();
@@ -124,5 +140,14 @@ public class MainActivity extends AppCompatActivity implements IMainView {
                 .setMessage(R.string.alert_content)
                 .setPositiveButton(android.R.string.yes, (dialog, which) -> dialog.cancel())
                 .show();
+    }
+
+    private void setActiveFilter(TextView textView) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            DrawableCompat.setTint(tvTopTen.getBackground(), getResources().getColor(R.color.colorPrimary));
+            DrawableCompat.setTint(tvShops.getBackground(), getResources().getColor(R.color.colorPrimary));
+            DrawableCompat.setTint(tvProducts.getBackground(), getResources().getColor(R.color.colorPrimary));
+            DrawableCompat.setTint(textView.getBackground(), getResources().getColor(R.color.colorFilterIndicator));
+        }
     }
 }

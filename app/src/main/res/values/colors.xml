@@ -10,4 +10,5 @@
     <color name="colorTabText">#636262</color>
     <color name="colorText">#000000</color>
     <color name="colorSale">#fe4a65</color>
+    <color name="colorFilterIndicator">#6c6d70</color>
 </resources>

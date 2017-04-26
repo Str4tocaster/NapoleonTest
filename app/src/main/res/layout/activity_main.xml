@@ -67,42 +67,98 @@
 
     </android.support.v7.widget.Toolbar>
 
-    <android.support.design.widget.TabLayout
-        android:id="@+id/tabs"
+
+
+    <LinearLayout
+        android:id="@+id/filter"
+        android:layout_below="@id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="48dp"
-        android:layout_below="@id/toolbar"
         android:background="@color/colorPrimary"
-        app:tabIndicatorColor="@android:color/white"
-        app:tabTextColor="@color/colorTabText"
-        app:tabSelectedTextColor="@color/colorWhite"
         >
 
-        <android.support.design.widget.TabItem
+        <RelativeLayout
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/top_ten"
-            />
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            >
 
-        <android.support.design.widget.TabItem
+            <TextView
+                android:id="@+id/tvTopTen"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:background="@drawable/rounded_rectangle"
+                android:backgroundTint="@color/colorFilterIndicator"
+                android:paddingTop="6dp"
+                android:paddingBottom="6dp"
+                android:paddingRight="16dp"
+                android:paddingLeft="16dp"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:textColor="@color/colorWhite"
+                android:text="@string/top_ten"
+                />
+
+        </RelativeLayout>
+
+        <RelativeLayout
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/shops"
-            />
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            >
 
-        <android.support.design.widget.TabItem
+            <TextView
+                android:id="@+id/tvShops"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:background="@drawable/rounded_rectangle"
+                android:backgroundTint="@color/colorPrimary"
+                android:paddingTop="6dp"
+                android:paddingBottom="6dp"
+                android:paddingRight="16dp"
+                android:paddingLeft="16dp"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:textColor="@color/colorWhite"
+                android:text="@string/shops"
+                />
+
+        </RelativeLayout>
+
+        <RelativeLayout
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/products"
-            />
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            >
 
-        </android.support.design.widget.TabLayout>
+            <TextView
+                android:id="@+id/tvProducts"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:background="@drawable/rounded_rectangle"
+                android:backgroundTint="@color/colorPrimary"
+                android:paddingTop="6dp"
+                android:paddingBottom="6dp"
+                android:paddingRight="16dp"
+                android:paddingLeft="16dp"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:textColor="@color/colorWhite"
+                android:text="@string/products"
+                />
+
+        </RelativeLayout>
+
+    </LinearLayout>
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recyclerView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@id/tabs"
+        android:layout_below="@id/filter"
         />
 
     <ProgressBar
@@ -117,7 +173,7 @@
         android:id="@+id/noInternet"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@id/tabs"
+        android:layout_below="@id/filter"
         android:background="@color/colorWhite"
         android:visibility="gone"
         >

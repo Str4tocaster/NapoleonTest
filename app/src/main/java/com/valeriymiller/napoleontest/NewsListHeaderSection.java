@@ -1,0 +1,86 @@
+package com.valeriymiller.napoleontest;
+
+import android.content.Context;
+import android.graphics.Rect;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.PagerSnapHelper;
+import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.SnapHelper;
+import android.view.View;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import io.github.luizgrp.sectionedrecyclerviewadapter.StatelessSection;
+
+/**
+ * Created by valer on 25.04.2017.
+ */
+
+public class NewsListHeaderSection extends StatelessSection {
+
+    private Context context;
+
+    public NewsListHeaderSection (Context context) {
+        super(R.layout.news_list_header, R.layout.news_list_item);
+        this.context = context;
+    }
+
+    @Override
+    public int getContentItemsTotal() {
+        return 0;
+    }
+
+    @Override
+    public RecyclerView.ViewHolder getItemViewHolder(View view) {
+        return null;
+    }
+
+    @Override
+    public void onBindItemViewHolder(RecyclerView.ViewHolder holder, int position) {
+    }
+
+    @Override
+    public RecyclerView.ViewHolder getHeaderViewHolder(View view) {
+        return new HeaderViewHolder(view);
+    }
+
+    @Override
+    public void onBindHeaderViewHolder(RecyclerView.ViewHolder holder) {
+        HeaderViewHolder headerHolder = (HeaderViewHolder) holder;
+
+        List<String> urls = new ArrayList<>();
+        urls.add("http://i.imgur.com/DvpvklR.png");
+        urls.add("http://i.imgur.com/DvpvklR.png");
+        urls.add("http://i.imgur.com/DvpvklR.png");
+
+        SliderAdapter sliderAdapter = new SliderAdapter(context, urls);
+
+        SnapHelper snapHelper = new PagerSnapHelper();
+        snapHelper.attachToRecyclerView(headerHolder.recyclerView);
+
+        LinearLayoutManager layoutManager =
+                new LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false);
+        headerHolder.recyclerView.setLayoutManager(layoutManager);
+        headerHolder.recyclerView.setAdapter(sliderAdapter);
+    }
+
+    class HeaderViewHolder extends RecyclerView.ViewHolder {
+
+        private final RecyclerView recyclerView;
+
+        public HeaderViewHolder(View view) {
+            super(view);
+            recyclerView = (RecyclerView) view.findViewById(R.id.recyclerView);
+        }
+    }
+
+//    static class OffsetDecoration extends RecyclerView.ItemDecoration {
+//
+//        @Override
+//        public void getItemOffsets(Rect outRect, View view, RecyclerView parent, RecyclerView.State state) {
+//            super.getItemOffsets(outRect, view, parent, state);
+//        }
+//    }
+
+}

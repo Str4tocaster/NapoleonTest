@@ -60,9 +60,9 @@ public class NewsListSection extends StatelessSection {
             itemHolder.tvSale.setVisibility(View.VISIBLE);
             itemHolder.tvSale.setText(String.valueOf(item.getSale()) + "%");
             itemHolder.tvPrice.setVisibility(View.VISIBLE);
-            itemHolder.tvPrice.setText(String.valueOf(item.getPrice()));
+            itemHolder.tvPrice.setText(String.valueOf(item.getPrice()) + " \u20BD");
             itemHolder.tvOldPrice.setVisibility(View.VISIBLE);
-            itemHolder.tvOldPrice.setText(String.valueOf(item.getOldPrice()));
+            itemHolder.tvOldPrice.setText(String.valueOf(item.getOldPrice()) + " \u20BD");
             itemHolder.tvOldPrice.setPaintFlags(itemHolder.tvOldPrice.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
         }
     }

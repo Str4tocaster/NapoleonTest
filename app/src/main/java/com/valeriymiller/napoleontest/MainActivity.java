@@ -10,32 +10,67 @@ import java.util.List;
 
 import io.github.luizgrp.sectionedrecyclerviewadapter.SectionedRecyclerViewAdapter;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements IMainView {
+
+    private List<SliderItemVO> sliderItems;
+    private List<NewsItemVO> stockItems;
+    private List<NewsItemVO> discountItems;
+    private SectionedRecyclerViewAdapter newsListAdapter;
+
+    private MainPresenter presenter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        List<SliderItemVO> sliderItems = new ArrayList<>();
-        sliderItems.add(new SliderItemVO("http://i.imgur.com/DvpvklR.png", "First header", "First content"));
-        sliderItems.add(new SliderItemVO("http://i.imgur.com/DvpvklR.png", "Second header", "Second content"));
-        sliderItems.add(new SliderItemVO("http://i.imgur.com/DvpvklR.png", "Third header", "Third content"));
+        sliderItems = new ArrayList<>();
+        stockItems = new ArrayList<>();
+        discountItems = new ArrayList<>();
 
-        List<NewsItemVO> items = new ArrayList<>();
-        items.add(new NewsItemVO("http://i.imgur.com/DvpvklR.png", "First news", "Text about first news", 50, 1.50f, 2.99f));
-        items.add(new NewsItemVO("http://i.imgur.com/DvpvklR.png", "Second news", "Text about second news", 20, 1.05f, 2.50f));
-        items.add(new NewsItemVO("http://i.imgur.com/DvpvklR.png", "Third news", "Text about third news", 30, 1.70f, 3.10f));
-
-        SectionedRecyclerViewAdapter newsListAdapter = new SectionedRecyclerViewAdapter();
+        newsListAdapter = new SectionedRecyclerViewAdapter();
         newsListAdapter.addSection(new NewsListHeaderSection(this, sliderItems));
-        newsListAdapter.addSection(new NewsListSection(this, "Акции", items));
-        newsListAdapter.addSection(new NewsListSection(this, "Скидки", items));
+        newsListAdapter.addSection(new NewsListSection(this, "Акции", stockItems));
+        newsListAdapter.addSection(new NewsListSection(this, "Скидки", discountItems));
 
         RecyclerView recyclerView = (RecyclerView) findViewById(R.id.recyclerView);
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setAdapter(newsListAdapter);
+
+        presenter = new MainPresenter(this);
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        presenter.onStart();
+    }
+
+    @Override
+    public void setNewsListItems(List<NewsItemVO> stockItems, List<NewsItemVO> discountItems) {
+        if (this.stockItems != null) {
+            this.stockItems.clear();
+            this.stockItems.addAll(stockItems);
+        }
+        if (this.discountItems != null) {
+            this.discountItems.clear();
+            this.discountItems.addAll(discountItems);
+        }
+        newsListAdapter.notifyDataSetChanged();
+    }
+
+    @Override
+    public void setSliderItems(List<SliderItemVO> sliderItems) {
+        if (this.sliderItems != null) {
+            this.sliderItems.clear();
+            this.sliderItems.addAll(sliderItems);
+        }
+        newsListAdapter.notifyDataSetChanged();
+    }
+
+    @Override
+    public void showProgress() {
 
     }
 }

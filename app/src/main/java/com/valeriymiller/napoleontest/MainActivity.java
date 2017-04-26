@@ -17,7 +17,7 @@ public class MainActivity extends AppCompatActivity implements IMainView {
     private List<NewsItemVO> discountItems;
     private SectionedRecyclerViewAdapter newsListAdapter;
 
-    private MainPresenter presenter;
+    private IMainPresenter presenter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,13 +38,15 @@ public class MainActivity extends AppCompatActivity implements IMainView {
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setAdapter(newsListAdapter);
 
-        presenter = new MainPresenter(this);
+        presenter = ((CustomApplication)getApplication()).getMainPresenter();
+        presenter.bindView(this);
+        presenter.onStart();
     }
 
     @Override
-    protected void onStart() {
-        super.onStart();
-        presenter.onStart();
+    protected void onDestroy() {
+        presenter.unbindView();
+        super.onDestroy();
     }
 
     @Override
@@ -70,7 +72,27 @@ public class MainActivity extends AppCompatActivity implements IMainView {
     }
 
     @Override
-    public void showProgress() {
+    public void showSliderProgress() {
+
+    }
+
+    @Override
+    public void hideSliderProgress() {
+
+    }
+
+    @Override
+    public void showNewsProgress() {
+
+    }
+
+    @Override
+    public void hideNewsProgress() {
+
+    }
+
+    @Override
+    public void showError() {
 
     }
 }

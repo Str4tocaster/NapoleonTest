@@ -11,25 +11,67 @@ import rx.Single;
 
 public class MainRepository implements IMainRepository {
 
+    private static final int TYPE_STOCK = 1;
+    private static final int TYPE_DISCOUNT = 2;
+
     @Override
     public Single<List<SliderItemVO>> getSliderItems() {
+        return getSliderItemsFromNet()
+                .flatMap(dtos -> dtoToSliderItemsVO(dtos));
+    }
 
+    private Single<List<SliderDTO>> getSliderItemsFromNet() {
+        return NetworkApi.getNetworkApi().getSliderItems().toSingle();
+    }
+
+    private Single<List<SliderItemVO>> dtoToSliderItemsVO(List<SliderDTO> dtos) {
         List<SliderItemVO> sliderItems = new ArrayList<>();
-        sliderItems.add(new SliderItemVO("http://i.imgur.com/DvpvklR.png", "First header", "First content"));
-        sliderItems.add(new SliderItemVO("http://i.imgur.com/DvpvklR.png", "Second header", "Second content"));
-        sliderItems.add(new SliderItemVO("http://i.imgur.com/DvpvklR.png", "Third header", "Third content"));
+        for (SliderDTO dto : dtos) {
+            sliderItems.add(new SliderItemVO(
+                    dto.getUrlThumbImage(),
+                    dto.getLineOne(),
+                    dto.getLineTwo()
+            ));
+        }
 
         return Single.just(sliderItems);
     }
 
     @Override
     public Single<List<NewsItemVO>> getNewsItems() {
+        return getNewsItemsFromNet()
+                .flatMap(dtos -> dtoToNewsItemsVO(dtos));
+    }
 
-        List<NewsItemVO> items = new ArrayList<>();
-        items.add(new NewsItemVO("http://i.imgur.com/DvpvklR.png", "First news", "Text about first news", 50, 1.50f, 2.99f));
-        items.add(new NewsItemVO("http://i.imgur.com/DvpvklR.png", "Second news", "Text about second news", 20, 1.05f, 2.50f));
-        items.add(new NewsItemVO("http://i.imgur.com/DvpvklR.png", "Third news", "Text about third news", 30, 1.70f, 3.10f));
+    private Single<List<NewsDTO>> getNewsItemsFromNet() {
+        return NetworkApi.getNetworkApi().getNewsItems().toSingle();
+    }
 
-        return Single.just(items);
+    private Single<List<NewsItemVO>> dtoToNewsItemsVO(List<NewsDTO> dtos) {
+        List<NewsItemVO> newsItems = new ArrayList<>();
+        for (NewsDTO dto : dtos) {
+            if (dto.getType() == TYPE_STOCK) {
+                newsItems.add(new NewsItemVO(
+                        dto.getUrlThumbImage(),
+                        dto.getName(),
+                        dto.getDescr(),
+                        0,
+                        0,
+                        0
+                        ));
+            }
+            if (dto.getType() == TYPE_DISCOUNT) {
+                newsItems.add(new NewsItemVO(
+                        dto.getUrlThumbImage(),
+                        dto.getName(),
+                        dto.getGroup(),
+                        dto.getDiscount(),
+                        dto.getPrice() - ((dto.getPrice() / 100) * dto.getDiscount()),
+                        dto.getPrice()
+                ));
+            }
+        }
+
+        return Single.just(newsItems);
     }
 }

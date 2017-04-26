@@ -9,11 +9,11 @@ public class NewsItemVO {
     private String imgUrl;
     private String headerText;
     private String contentText;
-    private int sale;
+    private float sale;
     private float price;
     private float oldPrice;
 
-    public NewsItemVO(String imgUrl, String headerText, String contentText, int sale, float price, float oldPrice) {
+    public NewsItemVO(String imgUrl, String headerText, String contentText, float sale, float price, float oldPrice) {
         this.imgUrl = imgUrl;
         this.headerText = headerText;
         this.contentText = contentText;
@@ -46,11 +46,11 @@ public class NewsItemVO {
         this.contentText = contentText;
     }
 
-    public int getSale() {
+    public float getSale() {
         return sale;
     }
 
-    public void setSale(int sale) {
+    public void setSale(float sale) {
         this.sale = sale;
     }
 

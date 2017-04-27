@@ -1,3 +1,3 @@
 # NapoleonTest
-![first screenshot](Screenshot_20170426-211028[1].png?raw=true "first screenshot")
-![second screenshot](Screenshot_20170426-211226[1].png?raw=true "second screenshot")
+<a href="http://imgur.com/HUlVqGm"><img src="http://i.imgur.com/HUlVqGml.png" title="source: imgur.com" /></a>
+<a href="http://imgur.com/1Gi9lkG"><img src="http://i.imgur.com/1Gi9lkGl.png" title="source: imgur.com" /></a>
